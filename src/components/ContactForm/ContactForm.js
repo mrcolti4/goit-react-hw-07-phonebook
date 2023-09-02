@@ -6,16 +6,16 @@ import { InputField } from 'components/InputField/InputField';
 
 import { validateName, validateNumber } from 'js/validation/validation';
 
-import { addContact } from 'redux/contactsSlice';
-import { getContactList } from 'redux/selectors';
+import { getContactList, selectFilteredContactList } from 'redux/selectors';
 import { isOnList } from 'js/utils/isOnList';
 import style from './ContactForm.module.css';
+import { addContact } from 'redux/contacts/contactsOperations';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
-  const contactList = useSelector(getContactList);
+  const contactList = useSelector(selectFilteredContactList);
 
   const resetInputs = () => {
     setName('');
@@ -37,7 +37,7 @@ export const ContactForm = () => {
     if (isOnList(contactList, name)) {
       return alert('Contact with this name already in list');
     }
-    dispatch(addContact(name, number));
+    dispatch(addContact({ name, number }));
     resetInputs();
   };
 

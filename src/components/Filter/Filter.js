@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { filterByName } from 'redux/filterSlice';
-import { getFilter } from 'redux/selectors';
+import { selectFilter } from 'redux/selectors';
 
 import style from './Filter.module.css';
 
 export const Filter = () => {
   const dispatch = useDispatch();
-  const selector = useSelector(getFilter);
+  const selector = useSelector(selectFilter);
 
   const onFilter = e => {
     dispatch(filterByName(e.target.value));

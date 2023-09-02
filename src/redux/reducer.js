@@ -1,5 +1,5 @@
 const { combineReducers } = require('@reduxjs/toolkit');
-const { contactsReducer } = require('./contactsSlice');
+const { contactsReducer } = require('./contacts/contactsSlice');
 const { filterReducer } = require('./filterSlice');
 
 export const reducer = combineReducers({
