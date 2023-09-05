@@ -1,5 +1,5 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
-import { addContact, fetchContacts } from './contactsOperations';
+import { createSlice } from '@reduxjs/toolkit';
+import { addContact, deleteContact, fetchContacts } from './contactsOperations';
 
 const contactsState = {
   items: [],
@@ -11,7 +11,11 @@ const handleFulfilled = (state, { payload }) => {
 };
 
 const handleAddContactFulfilled = (state, { payload }) => {
-  state.items = [...state.items, payload];
+  state.items = payload;
+};
+
+const handleDeleteContactFulfilled = (state, { payload }) => {
+  state.items = payload;
 };
 
 const contactsSlice = createSlice({
@@ -39,7 +43,8 @@ const contactsSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchContacts.fulfilled, handleFulfilled)
-      .addCase(addContact.fulfilled, handleAddContactFulfilled);
+      .addCase(addContact.fulfilled, handleAddContactFulfilled)
+      .addCase(deleteContact.fulfilled, handleDeleteContactFulfilled);
   },
 });
 
